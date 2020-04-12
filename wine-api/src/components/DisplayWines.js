@@ -14,25 +14,18 @@ const DisplayWines=(props) =>{
                 <tr>
                   <th>ID</th><th>Name</th><th>Year</th><th>Grapes</th><th>Country</th>
                 </tr>
-
               {
                 props.location.params.data.map((item,index)=>{return (
                 <Wine key={index} value={item} />
-                )}) 
-      
+                )})       
         }
-
-
-        </table>
-  
+        </table>  
       </div>
   );
   }
   else{
     return (
       <div  className='body'>
-     
-        
       </div>
   );
 
@@ -58,6 +51,13 @@ class Wine extends Component{
       buttonClicked:false
     }
     this.getSingleWine = this.getSingleWine.bind(this);
+    this.reset = this.reset.bind(this);
+
+  }
+  reset=(e)=>{
+    this.setState({buttonClicked:false})
+    e.preventDefault();
+
   }
    async getSingleWine(e){
      let id=e.target.innerHTML;
@@ -90,6 +90,8 @@ class Wine extends Component{
         console.log("localData",localData)
       return(
         <React.Fragment>
+            <button  onClick={this.reset}>Back</button>          
+
             <h2>Wine details are</h2>
             <img src= {localData.picture} width='150px' height='150px' alt={localData.id}/>
             <h3>Name: {localData.name}</h3>
