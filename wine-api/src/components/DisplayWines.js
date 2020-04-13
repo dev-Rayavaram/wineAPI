@@ -4,21 +4,20 @@ const DisplayWines=(props) =>{
   console.log("inside DisplayWines");
   if(typeof props.location.params  !== "undefined")
   {
-    Array(8)
-//{id: 4972, name: "CHATEAU DE SAINT COSME", year: 2009, grapes: "Grenache / Syrah", country: "France", …}
-
     console.log(props.location.params.data)
     return (
       <div  className='body'>
               <table>
-                <tr>
-                  <th>ID</th><th>Name</th><th>Year</th><th>Grapes</th><th>Country</th>
-                </tr>
+                <thead>
+                  <tr><td>ID</td><td>Name</td><td>Year</td><td>Grapes</td><td>Country</td></tr>
+                </thead>
+                <tbody>
               {
                 props.location.params.data.map((item,index)=>{return (
                 <Wine key={index} value={item} />
                 )})       
         }
+        </tbody>
         </table>  
       </div>
   );
@@ -52,13 +51,35 @@ class Wine extends Component{
     }
     this.getSingleWine = this.getSingleWine.bind(this);
     this.reset = this.reset.bind(this);
-
+    this.deleteAPI = this.deleteAPI.bind(this);
   }
   reset=(e)=>{
     this.setState({buttonClicked:false})
     e.preventDefault();
 
   }
+  componentDidUpdate(){
+
+  }
+  deleteAPI(event){
+          event.preventDefault();
+
+          console.log("DELETE was called ",this.props.value.id);
+   
+          let url = `http://myapi-profstream.herokuapp.com/api/61fcf4/wines/${this.props.value.id}`
+          axios.headers={
+         
+                 'Access-Control-Allow-Origin': '*',
+                 'Content-Type': 'application/json; charset=utf-8',
+           } 
+            axios.delete(url)
+            .then(res=>{
+              this.setState({buttonClicked:false})
+            }).catch(e=>{
+             console.log(e)});
+
+  }
+
    async getSingleWine(e){
      let id=e.target.innerHTML;
      console.log("inside getSingleWine",)
@@ -110,14 +131,9 @@ class Wine extends Component{
     }
     else{
       return(
-        <React.Fragment>    
-          <tr>
-            <td>
-              <button  onClick={this.getSingleWine}>{this.props.value.id}           
-              </button>         
-             </td><td> {this.props.value.name} </td> <td> {this.props.value.year} </td> <td>{this.props.value.grapes} </td> <td> {this.props.value.country}</td>
-          </tr>
-        </React.Fragment>
+        <React.Fragment>
+          <tr><td><button value={this.props.value.id} onClick={this.getSingleWine}>{this.props.value.id}</button></td><td>{this.props.value.name}</td> <td>{this.props.value.year}</td> <td>{this.props.value.grapes}</td><td>{this.props.value.country}</td><td><button value={this.props.value.id} onClick={this.deleteAPI}>DELETE</button></td></tr>
+          </React.Fragment>
        )
     }
   
