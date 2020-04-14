@@ -33,14 +33,6 @@ const DisplayWines=(props) =>{
 }
 
 export default DisplayWines;
-const SingleWine=(props)=>{
-  return(
-    <>
-    console.log("inside SingleWine")
-    console.log(props)
-    </>
-  )
-}
 
 class Wine extends Component{
   constructor(props){
@@ -74,7 +66,7 @@ class Wine extends Component{
            } 
             axios.delete(url)
             .then(res=>{
-              this.setState({buttonClicked:false})
+              this.setState({buttonClicked:false});
             }).catch(e=>{
              console.log(e)});
 

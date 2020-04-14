@@ -1,7 +1,6 @@
 import React ,{Component} from 'react'
 import {Route,Switch,NavLink,BrowserRouter as Router} from 'react-router-dom'
 import AddWine from '../components/AddWine'
-import DeleteWine from '../components/DeleteWine'
 import DisplayWine from '../components/DisplayWines'
 import {NavConsumer} from '../components/NavContext'
 
