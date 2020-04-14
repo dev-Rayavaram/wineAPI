@@ -41,6 +41,7 @@ export default class App extends Component{
       console.log(e);
     }
   }
+  
   componentDidMount(){
 
     //  http://myapi-profstream.herokuapp.com/api/61fcf4/wines
