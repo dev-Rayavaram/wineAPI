@@ -76,7 +76,7 @@ export default class AddWine extends Component{
              } 
              axios.post(url,body)
              .then(res=>{
-              alert(res.data)
+              alert("added the product ,please refresh main page and click on Show Wines")
              }).catch(e=>{
               console.log(e)});
               this.setState({ clicked:true});

@@ -29,8 +29,8 @@ class Navbar extends Component{
                 </ul>
           </nav>
           <Switch>
-              <Route exact path="/"  component={DisplayWine}>          
-              </Route>
+              <Route exact path="/"  render={props => <DisplayWine data={this.state.data.data} {...props} />} />
+                          
               <Route exact path="/AddWine" component={AddWine}>          
               </Route>
           </Switch>
